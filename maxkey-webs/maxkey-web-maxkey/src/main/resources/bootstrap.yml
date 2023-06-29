@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: maxkey
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:127.0.0.1}:${NACOS_PORT:8848}
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: properties
+        enabled: ${NACOS_CONFIG_ENABLED:true}
