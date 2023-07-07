@@ -25,30 +25,30 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
  
 /**
- * ç»™javaæ–‡ä»¶æ‰¹é‡æ·»åŠ Licenseä¿¡æ¯.
+ * ¸øjavaÎÄ¼şÅúÁ¿Ìí¼ÓLicenseĞÅÏ¢.
  * @author MaxKey Copyright Adder
  *
  */
 public class Copyright {   
-    // å­˜æ”¾javaæ–‡ä»¶çš„æ–‡ä»¶å¤¹,å¿…é¡»æ˜¯æ–‡ä»¶å¤¹
+    // ´æ·ÅjavaÎÄ¼şµÄÎÄ¼ş¼Ğ,±ØĞëÊÇÎÄ¼ş¼Ğ
     private static String srcFolder = "D:\\MaxKey\\workspace\\workspace-maxkey\\MaxKey";
-    //å·²æ·»åŠ æ ‡è¯†
+    //ÒÑÌí¼Ó±êÊ¶
     private static String copyRightText = "http://www.apache.org/licenses/LICENSE-2.0";
-    //æ‰«æç›®å½•
+    //É¨ÃèÄ¿Â¼
     private String folder;
-    //ç‰ˆæƒä¿¡æ¯
+    //°æÈ¨ĞÅÏ¢
     private String copyRight;
-    //å¾…æ·»åŠ æ‰€ä»¥æ–‡ä»¶ç»Ÿè®¡
+    //´ıÌí¼ÓËùÒÔÎÄ¼şÍ³¼Æ
     private long fileCount = 0;
-    //æ·»åŠ çš„é—®é¢˜å°±ç»Ÿè®¡
+    //Ìí¼ÓµÄÎÊÌâ¾ÍÍ³¼Æ
     private long copyRightFileCount = 0;
     private static String lineSeperator = System.getProperty("line.separator");
     private static String encode = "UTF-8";
     
     /**
      * Copyright.
-     * @param folder javaæ–‡ä»¶å¤¹.
-     * @param copyRight ç‰ˆæƒå†…å®¹.
+     * @param folder javaÎÄ¼ş¼Ğ.
+     * @param copyRight °æÈ¨ÄÚÈİ.
      */
     public Copyright(String folder, String copyRight) {
         this.folder = folder;
@@ -61,8 +61,8 @@ public class Copyright {
      * @throws IOException  IOException
      */
     public static void main(String[] args) throws IOException {
-        // ä»æ–‡ä»¶è¯»å–ç‰ˆæƒå†…å®¹
-        // åœ¨Dç›˜åˆ›å»ºä¸€ä¸ªcopyright.txtæ–‡ä»¶,æŠŠç‰ˆæƒå†…å®¹æ”¾è¿›å»å³å¯
+        // ´ÓÎÄ¼ş¶ÁÈ¡°æÈ¨ÄÚÈİ
+        // ÔÚDÅÌ´´½¨Ò»¸öcopyright.txtÎÄ¼ş,°Ñ°æÈ¨ÄÚÈİ·Å½øÈ¥¼´¿É
         String copyright = readCopyrightFromFile(
                 Copyright.class.getResource("copyright.txt").getFile());        
         new Copyright(srcFolder, copyright).process();
@@ -114,9 +114,9 @@ public class Copyright {
     private void doWrite(File file) throws IOException {
         StringBuilder javaFileContent = new StringBuilder();
         String line = null;
-        // å…ˆæ·»åŠ copyrightåˆ°æ–‡ä»¶å¤´
+        // ÏÈÌí¼Ócopyrightµ½ÎÄ¼şÍ·
         javaFileContent.append(copyRight).append(lineSeperator);
-        // è¿½åŠ å‰©ä½™å†…å®¹
+        // ×·¼ÓÊ£ÓàÄÚÈİ
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(new FileInputStream(file), encode));
         while ((line = br.readLine()) != null) {

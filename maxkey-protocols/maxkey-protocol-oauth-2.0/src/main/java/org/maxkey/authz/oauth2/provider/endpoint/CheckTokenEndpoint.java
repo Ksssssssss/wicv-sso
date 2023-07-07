@@ -98,7 +98,4 @@ public class CheckTokenEndpoint {
 
 		return response;
 	}
-
-	
-
 }

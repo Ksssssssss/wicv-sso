@@ -40,8 +40,8 @@ public interface UserInfoMapper  extends IJpaBaseMapper<UserInfo>{
 	@Select("select * from  mxk_userinfo where username = #{value} and status = " + ConstsStatus.ACTIVE)
 	public UserInfo findByUsername(String username);
 	
-	@Select("select * from  mxk_userinfo where ( email = #{value} or mobile= #{value} ) and status = " + ConstsStatus.ACTIVE)
-	public UserInfo findByEmailMobile(String emailMobile);
+	@Select("select * from  mxk_userinfo where  mobile= #{value} and status = " + ConstsStatus.ACTIVE)
+	public UserInfo findByMobile(String emailMobile);
 	 
 	public List<Organizations> findDeptsByUserId(String userId);
 	

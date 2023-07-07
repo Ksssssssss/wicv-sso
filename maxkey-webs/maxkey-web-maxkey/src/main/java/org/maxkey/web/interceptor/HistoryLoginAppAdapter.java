@@ -67,6 +67,8 @@ public class HistoryLoginAppAdapter  implements AsyncHandlerInterceptor  {
             }
         }
         _logger.debug("preHandle not have authority access " + app);
+        // response.sendRedirect(app.getLogoutUrl());
+        //todo 返回无权限的界面
         return false;
     }
     

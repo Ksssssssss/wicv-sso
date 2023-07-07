@@ -166,7 +166,7 @@ public class LoginEndpoint {
  	@RequestMapping("/login/sendsms/{mobile}")
     @ResponseBody
     public String produceOtp(@PathVariable("mobile") String mobile,HttpServletRequest request) {
-        UserInfo queryUserInfo=userInfoService.findByEmailMobile(mobile);
+        UserInfo queryUserInfo=userInfoService.findByMobile(mobile);
         if(queryUserInfo!=null) {
         	otpAuthnService.getByInstId(WebContext.getInst(request)).produce(queryUserInfo);
             return "ok";

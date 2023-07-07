@@ -20,16 +20,16 @@
  */
 package org.maxkey.authz.oidc.idtoken;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Set;
-import java.util.UUID;
-
+import com.google.common.base.Strings;
+import com.nimbusds.jose.*;
+import com.nimbusds.jose.util.Base64URL;
+import com.nimbusds.jwt.JWT;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.maxkey.authn.SigninPrincipal;
 import org.maxkey.authz.oauth2.common.DefaultOAuth2AccessToken;
 import org.maxkey.authz.oauth2.common.OAuth2AccessToken;
 import org.maxkey.authz.oauth2.provider.ClientDetailsService;
@@ -39,23 +39,18 @@ import org.maxkey.authz.oauth2.provider.token.TokenEnhancer;
 import org.maxkey.configuration.oidc.OIDCProviderMetadata;
 import org.maxkey.crypto.jwt.encryption.service.impl.DefaultJwtEncryptionAndDecryptionService;
 import org.maxkey.crypto.jwt.signer.service.impl.DefaultJwtSigningAndValidationService;
+import org.maxkey.entity.UserInfo;
 import org.maxkey.entity.apps.oauth2.provider.ClientDetails;
 import org.maxkey.web.WebContext;
-
-import com.nimbusds.jose.util.Base64URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Strings;
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JWEHeader;
-import com.nimbusds.jose.JWEObject;
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.JWSHeader;
-import com.nimbusds.jose.Payload;
-import com.nimbusds.jwt.JWT;
-import com.nimbusds.jwt.JWTClaimsSet;
-import com.nimbusds.jwt.SignedJWT;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author Crystal.Sea
@@ -102,13 +97,18 @@ public class OIDCIdTokenEnhancer implements TokenEnhancer {
 			}
 			
 			JWTClaimsSet.Builder builder=new JWTClaimsSet.Builder();
+			UserInfo userInfo = ((SigninPrincipal)authentication.getPrincipal()).getUserInfo();
 			builder.subject(authentication.getName())
 		      .expirationTime(accessToken.getExpiration())
 		      .issuer(clientDetails.getIssuer())
 		      .issueTime(new Date())
 		      .audience(Arrays.asList(authentication.getOAuth2Request().getClientId()))
-		      .jwtID(UUID.randomUUID().toString());
-			
+				.jwtID(UUID.randomUUID().toString())
+				.claim("userId", userInfo.getId())
+				.claim("displayName",userInfo.getDisplayName())
+				.claim("mobile",userInfo.getMobile())
+				.claim("userName",userInfo.getUsername());
+
 			/**
 			 * https://self-issued.me
 			 * @see http://openid.net/specs/openid-connect-core-1_0.html#SelfIssuedDiscovery

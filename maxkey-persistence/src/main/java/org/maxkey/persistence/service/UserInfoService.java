@@ -193,8 +193,8 @@ public class UserInfoService extends JpaBaseService<UserInfo> {
 		return getMapper().findByUsername(username);
 	}
 	
-    public UserInfo findByEmailMobile(String emailMobile) {
-        return getMapper().findByEmailMobile(emailMobile);
+    public UserInfo findByMobile(String emailMobile) {
+        return getMapper().findByMobile(emailMobile);
     }
 	
 	public UserInfo findByAppIdAndUsername(String appId,String username){

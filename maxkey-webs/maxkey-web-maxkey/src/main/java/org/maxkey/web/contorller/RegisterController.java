@@ -192,34 +192,26 @@ public class RegisterController {
 		return  modelAndView;
 	}
  	
-	//直接注册
+	//手机号注册
  	@RequestMapping(value={"/registeron"})
  	@ResponseBody
-	public Message registeron(UserInfo userInfo,@RequestParam String emailMobile) throws ServletException, IOException {
+	public Message registeron(UserInfo userInfo,@RequestParam String mobile) throws ServletException, IOException {
  		
- 		if(StringUtils.isEmpty(emailMobile)) {
+ 		if(StringUtils.isEmpty(mobile)) {
  			return new Message(WebContext.getI18nValue("register.emailMobile.error"),"1");
  		}
  		
- 		if(StringUtils.isValidEmail(emailMobile)) {
- 			userInfo.setEmail(emailMobile);
+ 		if(StringUtils.isValidMobileNo(mobile)) {
+ 			userInfo.setMobile(mobile);
  		}
  		
- 		if(StringUtils.isValidMobileNo(emailMobile)) {
- 			userInfo.setMobile(emailMobile);
- 		}
- 		
- 		if(!(StringUtils.isValidEmail(emailMobile)||StringUtils.isValidMobileNo(emailMobile))) {
+ 		if(!StringUtils.isValidMobileNo(mobile)) {
  			return new Message(WebContext.getI18nValue("register.emailMobile.error"),"1");
  		}
- 		
- 		UserInfo temp = userInfoService.findByEmailMobile(emailMobile);
- 		
- 		if(temp!=null) {
- 			return new Message(WebContext.getI18nValue("register.emailMobile.exist"),"1");
- 		}
- 		
- 		temp = userInfoService.findByUsername(userInfo.getUsername());
+
+		 //登录账号默认用手机号
+		userInfo.setUsername(mobile);
+ 		UserInfo temp = userInfoService.findByUsername(userInfo.getUsername());
  		if(temp!=null) {
  			return new Message(WebContext.getI18nValue("register.user.error"),"1");
  		}

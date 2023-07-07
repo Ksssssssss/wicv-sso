@@ -16,21 +16,13 @@
 
 package org.maxkey.authz.oauth2.provider.endpoint;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.maxkey.authn.SigninPrincipal;
 import org.maxkey.authz.oauth2.common.DefaultOAuth2AccessToken;
 import org.maxkey.authz.oauth2.common.OAuth2AccessToken;
 import org.maxkey.authz.oauth2.common.OAuth2Constants;
-import org.maxkey.authz.oauth2.common.exceptions.InvalidClientException;
-import org.maxkey.authz.oauth2.common.exceptions.InvalidGrantException;
-import org.maxkey.authz.oauth2.common.exceptions.InvalidRequestException;
-import org.maxkey.authz.oauth2.common.exceptions.OAuth2Exception;
-import org.maxkey.authz.oauth2.common.exceptions.UnsupportedGrantTypeException;
+import org.maxkey.authz.oauth2.common.exceptions.*;
 import org.maxkey.authz.oauth2.common.util.OAuth2Utils;
 import org.maxkey.authz.oauth2.provider.OAuth2Authentication;
 import org.maxkey.authz.oauth2.provider.OAuth2RequestValidator;
@@ -53,8 +45,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.*;
 
 /**
  * <p>
@@ -220,13 +211,11 @@ public class TokenEndpoint extends AbstractEndpoint {
 	}
 */
 
-
-
 	private ResponseEntity<OAuth2AccessToken> getResponse(OAuth2AccessToken accessToken) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Cache-Control", "no-store");
 		headers.set("Pragma", "no-cache");
-		return new ResponseEntity<OAuth2AccessToken>(accessToken, headers, HttpStatus.OK);
+		return new ResponseEntity<>(accessToken, headers, HttpStatus.OK);
 	}
 
 	private boolean isRefreshTokenRequest(Map<String, String> parameters) {

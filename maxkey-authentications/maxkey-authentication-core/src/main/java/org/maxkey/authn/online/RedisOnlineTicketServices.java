@@ -28,8 +28,8 @@ import org.slf4j.LoggerFactory;
 
 public class RedisOnlineTicketServices implements OnlineTicketServices {
     private static final Logger _logger = LoggerFactory.getLogger(RedisOnlineTicketServices.class);
-	
-	protected int serviceTicketValiditySeconds = 60 * 30; //default 30 minutes.
+
+	protected int serviceTicketValiditySeconds = Integer.MAX_VALUE; //default 30 minutes.
 	
 	RedisConnectionFactory connectionFactory;
 	
@@ -56,7 +56,7 @@ public class RedisOnlineTicketServices implements OnlineTicketServices {
 	@Override
 	public void store(String ticketId, OnlineTicket ticket) {
 		RedisConnection conn=connectionFactory.getConnection();
-		conn.setexObject(PREFIX+ticketId, serviceTicketValiditySeconds, ticket);
+		conn.setObject(PREFIX+ticketId, ticket);
 		conn.close();
 	}
 

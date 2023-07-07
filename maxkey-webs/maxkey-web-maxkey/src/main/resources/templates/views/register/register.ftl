@@ -20,7 +20,7 @@
 					<table  class="table table-bordered">
 						<tr>
 							<td><@locale code="forgotpassword.emailmobile"/></td>
-							<td><input  required="" type="text" id="emailMobile" name="emailMobile" class="form-control"  title="" value=""/></td>
+							<td><input  required="" type="text" id="emailMobile" name="mobile" class="form-control"  title="" value=""/></td>
 						</tr>
 						<tr>
 								<td><@locale code="login.text.captcha"/></td>
@@ -30,10 +30,6 @@
 						<tr>
 								<td><@locale code="userinfo.displayName"/></td>
 								<td><input required="" class="form-control" type='text' id='displayName'  name='displayName' tabindex="1"/></td>
-						</tr>
-						<tr>
-								<td><@locale code="userinfo.username"/></td>
-								<td><input required="" class="form-control" type='text' id='username'  name='username' tabindex="1"/></td>
 						</tr>
 						<tr>
 							<td><@locale code="login.text.password"/></td>
