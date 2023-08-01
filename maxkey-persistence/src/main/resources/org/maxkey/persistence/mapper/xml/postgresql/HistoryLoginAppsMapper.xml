@@ -13,16 +13,16 @@
 			and	appid	=	#{appId}
 		</if>
 		<if test="appName != null and appName != ''">
-			and	appname	like concat('%',#{appName},'%')
+			and	appname	like concat('%',#{appName}::text,'%')
 		</if> 
 		<if test="userId != null and userId != ''">
 			and	userId	=	#{userId}
 		</if> 
 		<if test="username != null and username != ''">
-			and	username	like concat('%',#{username},'%')
+			and	username	like concat('%',#{username}::text,'%')
 		</if> 
 		<if test="displayName != null and displayName != ''">
-			and	displayname	like concat('%',#{displayName},'%')
+			and	displayname	like concat('%',#{displayName}::text,'%')
 		</if> 
 		<if test="startDate != null and startDate != ''">
 			and	logintime	>=	#{startDate}
@@ -34,18 +34,18 @@
     </sql>
     
      <select id="queryPageResults" parameterType="HistoryLoginApps" resultType="HistoryLoginApps">
-    	select 
-			id,
-			sessionid,
-			appid,
-			appname,
-			uid,
-			username,
-			displayname,
-			to_char(logintime,'YYYY-MM-DD HH24:MI:SS') as logintime
+    	select
+			 id,
+			 sessionid,
+			 appid,
+			 appname,
+			 userId,
+			 username,
+			 displayname,
+			 to_char(logintime::time,'YYYY-MM-DD HH24:MI:SS') as logintime
     	from mxk_history_login_apps
-    	where	1	=	1
-    	<include refid="dao_where_statement"/>
+		 where	instid   =   #{instId}
+		 <include refid="dao_where_statement"/>
     	
     	order by logintime desc
     </select>

@@ -48,35 +48,38 @@
 			description,
 			vendor,
 			vendorurl,
-			
+
 			credential,
 			sharedusername,
 			sharedpassword,
 			systemuserattr,
-			
+
 			isextendattr,
 			extendattr,
 			userpropertys,
-			
+
 			issignature,
-			
+
 			isadapter,
+			adapterid,
+			adaptername,
 			adapter,
-			
+
 			principal,
 			credentials,
-			
+
 			visible,
-			
+
 			sortindex,
-			
+
 			createdby,
 			createddate,
-			
+
 			status,
-			
+
 			logouturl,
-			logouttype
+			logouttype,
+			instid
 		)values(
 			#{id},
 			#{name},
@@ -88,34 +91,37 @@
 			#{description},
 			#{vendor} ,
 			#{vendorUrl},
-			
+
 			#{credential},
 			#{sharedUsername},
 			#{sharedPassword},
 			#{systemUserAttr},
-			
+
 			#{isExtendAttr},
 			#{extendAttr},
 			#{userPropertys},
 			#{isSignature},
-			
+
 			#{isAdapter},
+			#{adapterId},
+			#{adapterName},
 			#{adapter},
-			
+
 			#{principal},
 			#{credentials},
-			
+
 			#{visible},
-			
+
 			#{sortIndex},
-			
+
 			#{createdBy},
 			#{createdDate} ,
-			
+
 			#{status},
 
 			#{logoutUrl},
-			#{logoutType}
+			#{logoutType},
+			#{instId}
 		)
 	</insert>
 	

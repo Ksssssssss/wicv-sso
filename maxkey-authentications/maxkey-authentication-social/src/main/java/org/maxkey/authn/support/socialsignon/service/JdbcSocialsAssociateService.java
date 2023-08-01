@@ -38,7 +38,7 @@ public class JdbcSocialsAssociateService   implements SocialsAssociateService{
 	
 	private static final String DEFAULT_DEFAULT_SIGNON_SELECT_STATEMENT = "select id, userid , username , provider , socialuserid , accesstoken , socialuserinfo , exattribute , createddate , updateddate , instid from mxk_socials_associate where provider = ?  and socialuserid = ?";
 	
-	private static final String DEFAULT_DEFAULT_BIND_SELECT_STATEMENT = "select id, userid , username , provider , socialuserid , accesstoken , socialuserinfo , exattribute , createddate , updateddate , instid from mxk_socials_associate where userid = ?" ;
+	private static final String DEFAULT_DEFAULT_BIND_SELECT_STATEMENT = "select id, userid , username , provider , socialuserid , accesstoken , socialuserinfo , exattribute , createddate , updatedate , instid from mxk_socials_associate where userid = ?" ;
 	
 	private static final String DEFAULT_DEFAULT_DELETE_STATEMENT = "delete from  mxk_socials_associate where  userid = ? and provider = ?";
 	

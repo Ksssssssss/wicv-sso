@@ -53,6 +53,15 @@
         	#{selectId}   
      	</foreach>
     </update>
+
+	<select id="queryOrgs" parameterType="Organizations" resultType="Organizations">
+		select
+		*
+		from mxk_organizations
+		where	instid   =   #{instId}
+		<include refid="dao_where_statement"/>
+		order by sortindex,id
+	</select>
     
   
 </mapper>
