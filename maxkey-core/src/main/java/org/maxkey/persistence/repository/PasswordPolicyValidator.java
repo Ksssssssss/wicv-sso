@@ -18,7 +18,11 @@
 package org.maxkey.persistence.repository;
 
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.collections4.ListUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.format.DateTimeFormat;
@@ -32,6 +36,7 @@ import org.maxkey.web.WebConstants;
 import org.maxkey.web.WebContext;
 import org.passay.PasswordData;
 import org.passay.PasswordValidator;
+import org.passay.Rule;
 import org.passay.RuleResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,9 +88,10 @@ public class PasswordPolicyValidator {
            _logger.debug("password  is Empty ");
            return false;
        }
-       
+
+       List<Rule> passwordPolicyRuleList = ListUtils.emptyIfNull(passwordPolicyRepository.getPasswordPolicyRuleList());
        PasswordValidator validator = new PasswordValidator(
-               new PasswordPolicyMessageResolver(messageSource),passwordPolicyRepository.getPasswordPolicyRuleList());
+               new PasswordPolicyMessageResolver(messageSource), passwordPolicyRuleList);
        
        RuleResult result = validator.validate(new PasswordData(username,password));
        
